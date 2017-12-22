@@ -1,24 +1,10 @@
-buildscript {
-    ext {
-        kotlin_version = '1.1.2'
-    }
-    repositories {
-        mavenCentral()
-        maven {
-            url  "https://dl.bintray.com/jetbrains/kotlin-native-dependencies"
-        }
-
-    }
-}
-
-plugins {
-    id "org.jetbrains.kotlin.jvm" version '1.1.2'
-}
-
 apply plugin: "java"
 apply plugin: "kotlin"
 apply plugin: "application"
 
+
+// Run: 'gradlew wrapper' im jeweiligen
+final String GRADLE_VERSION = "4.3"
 
 mainClassName = "demo.HelloWorld"
 
@@ -30,8 +16,13 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    kotlinVersion: "1.2.10"         // https://kotlinlang.org/docs/reference/using-gradle.html
+}
+
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
     testCompile 'junit:junit:4.11'
@@ -41,5 +32,8 @@ dependencies {
 test.testClassesDir = project.tasks.compileTestKotlin.destinationDir
 
 task wrapper(type: Wrapper) {
-    gradleVersion = "3.5"
+    gradleVersion = GRADLE_VERSION
+    logger.lifecycle("\nGradle version set to $GRADLE_VERSION!")
 }
+
+

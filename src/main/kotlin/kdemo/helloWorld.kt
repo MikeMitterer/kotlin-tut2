@@ -1,10 +1,7 @@
 package kdemo
 
-import org.apache.commons.lang3.time.StopWatch
-
-fun showMyName(name: String) {
-    println(name)
-}
+import at.mikemitterer.kotlin.c4.showMyName
+import org.apache.commons.lang3.time.StopWatch as swx
 
 class KotlinGreetingJoiner(val greeter: demo.Greeter) {
 
@@ -13,7 +10,7 @@ class KotlinGreetingJoiner(val greeter: demo.Greeter) {
     fun addName(name: String?) {
         //val kn = KName()
 
-        val sw = StopWatch()
+        val sw = swx()
         sw.start()
 
         showMyName("Mike")

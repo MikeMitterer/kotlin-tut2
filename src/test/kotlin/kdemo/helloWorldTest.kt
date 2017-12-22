@@ -1,11 +1,13 @@
+package kdemo
 
 import demo.Greeter
-import kdemo.KotlinGreetingJoiner
+import org.junit.Test
 import kotlin.test.assertEquals
-import org.junit.Test as test
 
-class TestSource() {
-    @org.junit.Test fun f() {
+class helloWorldTest {
+
+    @Test
+    fun f() {
         val example : KotlinGreetingJoiner = KotlinGreetingJoiner(Greeter("Hi"))
         example.addName("Harry")
         example.addName("Ron")
@@ -14,5 +16,10 @@ class TestSource() {
 
         assertEquals(example.getJoinedGreeting(), "Hi Harry and Ron and Hermione")
     }
-}
 
+    @Test
+    fun myName() {
+        val name = "Mike"
+        assertEquals(name, "Mike")
+    }
+}
