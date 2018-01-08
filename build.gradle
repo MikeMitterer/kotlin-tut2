@@ -1,5 +1,10 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.10"
+    //id "kotlin-gradle-plugin" version "1.2.10"
+}
+
 apply plugin: "java"
-apply plugin: "kotlin"
+apply plugin: 'kotlin'
 apply plugin: "application"
 
 
@@ -17,16 +22,22 @@ repositories {
 }
 
 ext {
-    kotlinVersion: "1.2.10"         // https://kotlinlang.org/docs/reference/using-gradle.html
+    kotlinVersion = "1.2.10"         // https://kotlinlang.org/docs/reference/using-gradle.html
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    
+
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib',   version: kotlinVersion
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',  version: kotlinVersion
+
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
+    testCompile group: 'org.jetbrains.kotlin', name: 'kotlin-test-junit', version: kotlinVersion
+    testCompile group: 'io.kotlintest', name: 'kotlintest', version: "2.+"
+
+    // JUnit
     testCompile 'junit:junit:4.11'
-    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 }
 
 test.testClassesDir = project.tasks.compileTestKotlin.destinationDir
@@ -34,6 +45,14 @@ test.testClassesDir = project.tasks.compileTestKotlin.destinationDir
 task wrapper(type: Wrapper) {
     gradleVersion = GRADLE_VERSION
     logger.lifecycle("\nGradle version set to $GRADLE_VERSION!")
+}
+
+compileKotlin {
+    kotlinOptions { jvmTarget = "1.8"  }
+}
+
+compileTestKotlin {
+    kotlinOptions { jvmTarget = "1.8" }
 }
 
 
