@@ -1,11 +1,13 @@
 package at.mikemitterer.kotlin.c4
+
+import at.mikemitterer.kotlin.c5.*
 import org.junit.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 class TestFunctions {
-    
+
     @Test
     fun testShowMyName() {
         assertEquals("Name Mike, Alter: 50...", showMyName("Mike"))
@@ -37,19 +39,21 @@ class TestFunctions {
 
     @Test
     fun testExtensionFunction() {
-        assertEquals("Mike - say: Shut up!","Mike".say("Shut up!"))
+        assertEquals("Mike - say: Shut up!", "Mike".say("Shut up!"))
     }
 
     @Test
     fun testExtensionFunctionInClass() {
         val test = ExtendClassWithScope("Peppels")
-        assertEquals("Mike: (shout) Peppels - no clue",test.shout())
+        assertEquals("Mike: (shout) Peppels - no clue", test.shout())
     }
 
-    @Test
+    @Test(expected = AssertionError::class)
     fun testExtendCompanion() {
         val random = Int.random()
-        assertTrue(message = "acdd") { random == 10 || random == 11 }
+        assertTrue(message = "Random-Value should be 10 || 11 but was $random") {
+            random == 10 || random == 11
+        }
     }
 
     @Test
@@ -62,21 +66,10 @@ class TestFunctions {
             "Mike"
         }
 
-        assertEquals("Hallo -> Mike",result1)
-        assertEquals("Mike",result2)
+        assertEquals("Hallo -> Mike", result1)
+        assertEquals("Mike", result2)
     }
 
-    @Test
-    fun testMiniDSL() {
-        val result = MiniDSL { "Hallo" + "Test" }
-        assertEquals("HalloTest",result)
-    }
 
-    @Test
-    fun testMultiRetValue() {
-        val (name,age) = MultiReturnValues()
-        assertEquals("Mike",name)
-        assertEquals(51,age)
-    }
 }
 

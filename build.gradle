@@ -1,6 +1,6 @@
 plugins {
-    id "org.jetbrains.kotlin.jvm" version "1.2.10"
-    //id "kotlin-gradle-plugin" version "1.2.10"
+    // Akutelle Version: https://goo.gl/RriFBZ
+    id "org.jetbrains.kotlin.jvm" version "1.2.21"
 }
 
 apply plugin: "java"
@@ -22,7 +22,7 @@ repositories {
 }
 
 ext {
-    kotlinVersion = "1.2.10"         // https://kotlinlang.org/docs/reference/using-gradle.html
+    kotlinVersion = "1.2.21"         // Version: https://goo.gl/RriFBZ
 }
 
 dependencies {

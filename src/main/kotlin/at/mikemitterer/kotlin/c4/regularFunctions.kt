@@ -1,12 +1,61 @@
 package at.mikemitterer.kotlin.c4
 
-import java.util.*
+import at.mikemitterer.kotlin.c5.printLambda1Param
+import at.mikemitterer.kotlin.c5.printLambda2Param
 
-/**
- *
- *
- * @since   06.10.17, 19:39
- */
+@JvmOverloads
+fun showMyName(name:String, age:Int = 50) : String {
+    val result = "Name $name, Alter: $age..."
+
+    println(result)
+    return result
+}
+
+fun nestedFunction(name:String) : String {
+    var result = name
+    fun addAge() {
+        result = name + "51"
+    }
+
+    addAge()
+    return result
+}
+
+fun printUntilStop() {
+    val list = listOf("a", "b", "stop", "c")
+    // Crashed
+//    stop@ list.forEach ( fun(x)   {
+//        if( x == "stop") {
+//            return@stop
+//        }
+//        else {
+//            println("Signal: $x")
+//        }
+//    })
+
+    printLambda1Param {
+        println("Callback (Name): $it")
+    }
+
+    printLambda2Param { first: String, last: String ->
+        println("Callback (Name): $first $last")
+        println("Callback (Name): $first $last")
+    }
+
+    list.forEach {
+        if( it == "stop") {
+            return
+        }
+        else {
+            println("Signal: $it")
+        }
+    }
+
+}
+fun testNullPointer(valueCanBeNull: String) {
+    println("Dieser Wert kann auch null sein: ${valueCanBeNull}!")
+}
+
 fun showBinValue(value: Int) {
     println("Bin-Value: $value")
 
@@ -61,105 +110,4 @@ fun printZeroOrOne(value: Int) {
     println("$value ist <= 10: ${(if(result2) "ja" else "nein")}")
 }
 
-fun printUntilStop() {
-    val list = listOf("a", "b", "stop", "c")
-    // Crashed
-//    stop@ list.forEach ( fun(x)   {
-//        if( x == "stop") {
-//            return@stop
-//        }
-//        else {
-//            println("Signal: $x")
-//        }
-//    })
 
-    printLambda1Param {
-        println("Callback (Name): $it")
-    }
-
-    printLambda2Param { first: String, last: String ->
-        println("Callback (Name): $first $last")
-        println("Callback (Name): $first $last")
-    }
-
-    list.forEach {
-        if( it == "stop") {
-            return
-        }
-        else {
-            println("Signal: $it")
-        }
-    }
-
-}
-
-fun printLambda1Param(callback: (value: String) -> Unit) {
-    callback("Mike")
-}
-
-fun printLambda2Param(callback: (value: String, value2: String) -> Unit) {
-    callback("Mike","Mitterer")
-}
-
-fun testNullPointer(valueCanBeNull: String) {
-    println("Dieser Wert kann auch null sein: ${valueCanBeNull}!")
-}
-
-@JvmOverloads
-fun showMyName(name:String, age:Int = 50) : String {
-    val result = "Name $name, Alter: $age..."
-
-    println(result)
-    return result
-}
-
-fun nestedFunction(name:String) : String {
-    var result = name
-    fun addAge() {
-        result = name + "51"
-    }
-
-    addAge()
-    return result
-}
-
-fun requireTest(age:Int) : Int {
-    require(age > 33, { "Age must be above 33" })
-    return age
-}
-
-fun namedParams(name:String,age: Int) : String = "Name: $name, Age: $age"
-
-fun String.say(word:String) : String {
-    return "${this} - say: $word"
-}
-
-open class ExtendClassWithScope(val petName: String) {
-
-    private fun String.shout(word:String): String {
-        return "$this: (shout) $petName - $word"
-    }
-
-    fun shout() = "Mike".shout("no clue")
-}
-
-class ExtendTheExtions : ExtendClassWithScope("Rolf") {
-
-}
-
-fun Int.Companion.random() : Int {
-    val random = Random()
-    return random.nextInt(1)
-}
-
-fun myAssert(name: String? = null,callback: () -> String) : String {
-    return when (name) {
-        null -> callback()
-        else -> "$name -> ${callback()}"
-    }
-}
-
-fun MiniDSL(callback: () -> String) : String = callback()
-
-
-fun MultiReturnValues() : Pair<String,Int> = Pair("Mike",51)

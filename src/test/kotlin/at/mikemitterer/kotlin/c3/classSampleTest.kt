@@ -62,8 +62,11 @@ class TestOOP {
 
     @Test
     fun testMultipleCTORs() {
+        // Im Konstruktor wird der lastName mit "unknown" überschrieben
         val mctor = MultipleCTORs("Mike")
-        assertEquals("Mike <default>", mctor.name)
+
+        // 52 kommt vom Init-Block des primären Konstruktors
+        assertEquals("Mike unknown / 52", mctor.name)
     }
 
     @Test
