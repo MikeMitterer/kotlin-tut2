@@ -22,13 +22,14 @@ repositories {
 }
 
 ext {
-    kotlinVersion = "1.2.21"         // Version: https://goo.gl/RriFBZ
+    kotlinVersion = "1.2.+"         // Version: https://goo.gl/RriFBZ
 }
 
 dependencies {
 
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib',   version: kotlinVersion
-    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',  version: kotlinVersion
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8',  version: kotlinVersion
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib',       version: kotlinVersion
+    compile group: 'org.jetbrains.kotlin', name: 'kotlin-reflect',      version: kotlinVersion
 
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
 
@@ -36,8 +37,7 @@ dependencies {
     testCompile group: 'io.kotlintest', name: 'kotlintest', version: "2.+"
 
     // JUnit
-    testCompile 'junit:junit:4.11'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
+    testCompile 'junit:junit:4.+'
 }
 
 test.testClassesDir = project.tasks.compileTestKotlin.destinationDir
