@@ -1,4 +1,4 @@
-package at.mikemitterer.kotlin.udeme
+package at.mikemitterer.kotlin.udemy
 
 
 import io.kotlintest.matchers.shouldBe

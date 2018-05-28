@@ -3,6 +3,7 @@ package at.mikemitterer.kotlin.c3
 import org.junit.Test
 import kotlin.test.assertEquals
 
+
 /**
  * @since 08.12.17, 10:14
  */

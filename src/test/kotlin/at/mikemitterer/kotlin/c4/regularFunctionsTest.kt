@@ -48,6 +48,27 @@ class TestFunctions {
         assertEquals("Mike: (shout) Peppels - no clue", test.shout())
     }
 
+    @Test
+    fun testBoolExtension() {
+        fun Boolean.isTrue(callback: () -> Unit) {
+            if(this) callback()
+        }
+
+        var counter = 0
+        
+        true.isTrue { counter++ }
+        false.isTrue { counter++ }
+
+        assertEquals(1,counter)
+
+        counter = 0
+        var name : String = "Mike"
+        (name.length > 5).isTrue {  counter ++ }
+
+        assertEquals(0,counter)
+
+    }
+
     @Test(expected = AssertionError::class)
     fun testExtendCompanion() {
         val random = Int.random()
